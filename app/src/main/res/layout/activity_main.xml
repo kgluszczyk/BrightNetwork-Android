@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <Button
-            android:id="@+id/search_for_festivals"
+            android:id="@+id/searchForFestivals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
