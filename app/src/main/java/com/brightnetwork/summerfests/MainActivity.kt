@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         searchButton.setOnClickListener {
             text = input.text.toString().take(3)
             Log.d("FESTFEST-1", "InputText:${text}: $this")
-            val festivals = Datasource().loadFestivals()
+            val festivals = Datasource().loadFestivals(this)
             Log.d("FESTFEST-2", "Festivals:${festivals}")
         }
     }
