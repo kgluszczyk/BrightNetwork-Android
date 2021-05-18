@@ -3,4 +3,7 @@
     <string name="no_festivals_around">No festivals around</string>
     <string name="enter_festival_name">Enter festival name</string>
     <string name="search">Search</string>
+
+    <string name="event_1">Test festival</string>
+
 </resources>
