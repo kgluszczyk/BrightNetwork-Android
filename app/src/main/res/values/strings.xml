@@ -3,22 +3,16 @@
     <string name="no_festivals_around">No festivals around</string>
     <string name="enter_festival_name">Enter festival name</string>
     <string name="search">Search</string>
-
     <string name="event_1_name">Festival 1</string>
     <string name="event_2_name">Festival 2</string>
     <string name="event_3_name">Festival 3</string>
-
     <string name="event_1_cost">1.5</string>
     <string name="event_2_cost">1.1</string>
     <string name="event_3_cost">1.4</string>
-
-
     <string name="event_1_date">Rock</string>
     <string name="event_2_date">Indie Rock</string>
     <string name="event_3_date">Rock</string>
-
     <string name="event_1_genres">21/12/2021</string>
     <string name="event_2_genres">21/12/2021</string>
     <string name="event_3_genres">21/12/2021</string>
-
 </resources>
