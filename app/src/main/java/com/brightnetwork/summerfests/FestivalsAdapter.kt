@@ -3,6 +3,7 @@ package com.brightnetwork.summerfests
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,7 +30,7 @@ class FestivalViewHolder(private val view: View, private val action: FestivalCli
     RecyclerView.ViewHolder(view) {
 
     fun bind(festival: Festival) {
-        view.findViewById<ViewGroup>(R.id.container).setBackgroundResource(festival.image)
+        view.findViewById<ImageView>(R.id.image_background).setImageResource(festival.image)
         view.findViewById<TextView>(R.id.title).text = festival.title
         view.findViewById<TextView>(R.id.cost).text = festival.cost
         view.findViewById<TextView>(R.id.date).text = festival.date
