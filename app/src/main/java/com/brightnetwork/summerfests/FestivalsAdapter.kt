@@ -29,6 +29,7 @@ class FestivalViewHolder(private val view: View, private val action: FestivalCli
     RecyclerView.ViewHolder(view) {
 
     fun bind(festival: Festival) {
+        view.findViewById<ViewGroup>(R.id.container).setBackgroundResource(festival.image)
         view.findViewById<TextView>(R.id.title).text = festival.title
         view.findViewById<TextView>(R.id.cost).text = festival.cost
         view.findViewById<TextView>(R.id.date).text = festival.date

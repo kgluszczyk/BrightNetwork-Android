@@ -10,19 +10,22 @@ class Datasource {
                 title = context.resources.getString(R.string.event_1_name),
                 cost = context.resources.getString(R.string.event_1_cost),
                 genres = context.resources.getString(R.string.event_1_genres),
-                date = context.resources.getString(R.string.event_1_date)
+                date = context.resources.getString(R.string.event_1_date),
+                image = R.drawable.event_1
             ),
             Festival(
                 title = context.resources.getString(R.string.event_2_name),
                 cost = context.resources.getString(R.string.event_2_cost),
                 genres = context.resources.getString(R.string.event_2_genres),
-                date = context.resources.getString(R.string.event_2_date)
+                date = context.resources.getString(R.string.event_2_date),
+                image = R.drawable.event_2
             ),
             Festival(
                 title = context.resources.getString(R.string.event_3_name),
                 cost = context.resources.getString(R.string.event_3_cost),
                 genres = context.resources.getString(R.string.event_3_genres),
-                date = context.resources.getString(R.string.event_3_date)
+                date = context.resources.getString(R.string.event_3_date),
+                image = R.drawable.event_3
             ),
         )
 }
