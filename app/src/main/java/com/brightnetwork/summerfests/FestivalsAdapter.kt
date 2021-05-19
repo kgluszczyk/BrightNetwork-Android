@@ -6,10 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FestivalsAdapter(private val festivals: List<Festival>) : RecyclerView.Adapter<FestivalViewHolder>() {
+typealias FestivalClick = (Festival) -> Unit
+class FestivalsAdapter(private val festivals: List<Festival>, private val action: FestivalClick) : RecyclerView.Adapter<FestivalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FestivalViewHolder {
-        return FestivalViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.festival_item, parent, false))
+        return FestivalViewHolder(
+            view = LayoutInflater.from(parent.context).inflate(R.layout.festival_item, parent, false),
+            action = action
+        )
     }
 
     override fun onBindViewHolder(holder: FestivalViewHolder, position: Int) {
@@ -21,12 +25,17 @@ class FestivalsAdapter(private val festivals: List<Festival>) : RecyclerView.Ada
     }
 }
 
-class FestivalViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class FestivalViewHolder(private val view: View, private val action: FestivalClick) :
+    RecyclerView.ViewHolder(view) {
+
     fun bind(festival: Festival) {
         view.findViewById<TextView>(R.id.title).text = festival.title
         view.findViewById<TextView>(R.id.cost).text = festival.cost
         view.findViewById<TextView>(R.id.date).text = festival.date
         view.findViewById<TextView>(R.id.genres).text = festival.genres
+        view.setOnClickListener {
+            action(festival)
+        }
     }
 
 }

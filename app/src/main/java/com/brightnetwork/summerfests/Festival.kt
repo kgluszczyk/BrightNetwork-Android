@@ -1,4 +1,7 @@
 package com.brightnetwork.summerfests
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-data class Festival(val title: String, val date: String, val cost: String, val genres: String)
+@Parcelize
+data class Festival(val title: String, val date: String, val cost: String, val genres: String) : Parcelable

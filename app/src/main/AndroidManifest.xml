@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SummerFests">
         <activity
+            android:name=".FestivalDetailsActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".FestivalsActivity"
             android:exported="true">
             <intent-filter>
