@@ -3,6 +3,7 @@ package com.brightnetwork.summerfests
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -33,8 +34,13 @@ class FestivalViewHolder(private val view: View, private val action: FestivalCli
         view.findViewById<TextView>(R.id.cost).text = festival.cost
         view.findViewById<TextView>(R.id.date).text = festival.date
         view.findViewById<TextView>(R.id.genres).text = festival.genres
+        view.findViewById<ImageView>(R.id.indicator).visibility = View.GONE
         view.setOnClickListener {
             action(festival)
+        }
+        view.setOnLongClickListener {
+            view.findViewById<ImageView>(R.id.indicator).visibility = View.VISIBLE
+            true
         }
     }
 
