@@ -3,6 +3,10 @@ package com.brightnetwork.summerfests
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -47,6 +51,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupCameraEntryPoint()
+        setupSensors()
+    }
+
+    private fun setupSensors() {
+        val sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        val proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        val listener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent) {
+                val label = "${event.sensor.name}: ${event.values[0]} cm"
+                Log.d("SENSOR", label)
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
+            }
+
+        }
+        sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_UI)
     }
 
     private fun setupCameraEntryPoint() {
