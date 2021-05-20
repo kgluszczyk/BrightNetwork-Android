@@ -10,5 +10,5 @@ data class Festival(
     val date: String,
     val cost: String,
     val genres: String,
-    @DrawableRes val image: Int
+    val imageUrl: String? = null
 ) : Parcelable

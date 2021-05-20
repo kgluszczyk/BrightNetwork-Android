@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 typealias FestivalClick = (Festival) -> Unit
-class FestivalsAdapter(private val festivals: List<Festival>, private val action: FestivalClick) : RecyclerView.Adapter<FestivalViewHolder>() {
+class FestivalsAdapter(private var festivals: List<Festival> = emptyList(), private val action: FestivalClick) : RecyclerView.Adapter<FestivalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FestivalViewHolder {
         return FestivalViewHolder(
@@ -24,13 +24,18 @@ class FestivalsAdapter(private val festivals: List<Festival>, private val action
     override fun getItemCount(): Int {
         return festivals.size
     }
+
+    fun setData(festivals: List<Festival>){
+        this.festivals = festivals
+        notifyDataSetChanged()
+    }
 }
 
 class FestivalViewHolder(private val view: View, private val action: FestivalClick) :
     RecyclerView.ViewHolder(view) {
 
     fun bind(festival: Festival) {
-        view.findViewById<ImageView>(R.id.image_background).setImageResource(festival.image)
+        //view.findViewById<ImageView>(R.id.image_background).setImageResource(festival.imageUrl)
         view.findViewById<TextView>(R.id.title).text = festival.title
         view.findViewById<TextView>(R.id.cost).text = festival.cost
         view.findViewById<TextView>(R.id.date).text = festival.date
