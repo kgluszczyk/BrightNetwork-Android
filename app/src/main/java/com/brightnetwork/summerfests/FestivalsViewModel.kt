@@ -30,22 +30,19 @@ class FestivalsViewModel : ViewModel() {
                         App.database.festivalsDao().insert(festivalsDTO)
                     }.start()
                 }
-                festivalsDTO?.map { festivalDTO ->
-                    Festival(
-                        title = festivalDTO.name,
-                        date = "${festivalDTO.startDate}(${festivalDTO.durationInDays})",
-                        cost = "${festivalDTO.cost} ${festivalDTO.currency}",
-                        genres = festivalDTO.genre ?: "-",
-                        imageUrl = festivalDTO.imageUrl
-                    )
-                }?.let {
-                    dataStream.postValue(FestivalsState.Loaded(it))
+                festivalsDTO?.let {
+                    dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
                 }
             }
 
             override fun onFailure(call: Call<List<FestivalDTO>>, t: Throwable) {
                 Log.e("RETROFIT", "Failed to fetch festivals", t)
                 dataStream.postValue(FestivalsState.Error)
+                Thread {
+                    App.database.festivalsDao().get().also {
+                        dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
+                    }
+                }.start()
             }
 
         })

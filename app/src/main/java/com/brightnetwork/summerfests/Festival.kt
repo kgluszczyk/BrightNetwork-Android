@@ -12,3 +12,13 @@ data class Festival(
     val genres: String,
     val imageUrl: String? = null
 ) : Parcelable
+
+fun List<FestivalDTO>.toFestivals() = this.map { festivalDTO ->
+    Festival(
+        title = festivalDTO.name,
+        date = "${festivalDTO.startDate}(${festivalDTO.durationInDays})",
+        cost = "${festivalDTO.cost} ${festivalDTO.currency}",
+        genres = festivalDTO.genre ?: "-",
+        imageUrl = festivalDTO.imageUrl
+    )
+}
