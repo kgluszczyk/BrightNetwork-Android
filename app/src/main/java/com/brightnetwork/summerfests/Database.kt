@@ -1,14 +1,17 @@
 package com.brightnetwork.summerfests
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.RoomDatabase
+import kotlinx.coroutines.flow.Flow
 
 @Database(entities = [FestivalDTO::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun festivalsDao() : FestivalsDao
+
+    abstract fun festivalsDao(): FestivalsDao
 }
 
 @Dao
@@ -18,7 +21,7 @@ interface FestivalsDao {
     fun delete()
 
     @Query("SELECT * FROM festivaldto ORDER BY festivaldto.cost DESC")
-    fun get() :List<FestivalDTO>
+    fun get(): Flow<List<FestivalDTO>>
 
     @Insert
     fun insert(festivals: List<FestivalDTO>)

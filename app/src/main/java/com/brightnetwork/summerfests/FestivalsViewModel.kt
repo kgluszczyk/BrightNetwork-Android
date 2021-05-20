@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -24,6 +25,11 @@ class FestivalsViewModel : ViewModel() {
     private fun fetchFestivals() {
         dataStream.postValue(FestivalsState.Loading)
         viewModelScope.launch(Dispatchers.IO) {
+            App.database.festivalsDao().get().collect { festivalsDTO ->
+                dataStream.postValue(FestivalsState.Loaded(festivalsDTO.toFestivals()))
+            }
+        }
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val festivalsDTO = NetworkService.festivalService.getFestivals()
                 Log.d("RETROFIT", "Response: $festivalsDTO")
@@ -31,15 +37,9 @@ class FestivalsViewModel : ViewModel() {
                     App.database.festivalsDao().delete()
                     App.database.festivalsDao().insert(festivalsDTO)
                 }
-                festivalsDTO.let {
-                    dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
-                }
             } catch (exception: Exception) {
                 Log.e("RETROFIT", "Failed to fetch festivals", exception)
                 dataStream.postValue(FestivalsState.Error)
-                App.database.festivalsDao().get().also {
-                    dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
-                }
             }
         }
     }
