@@ -3,6 +3,8 @@ package com.brightnetwork.summerfests
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,39 +19,23 @@ class FestivalsActivity : AppCompatActivity() {
             }
     }
 
+    lateinit var viewModel: FestivalsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(FestivalsViewModel::class.java)
         setContentView(R.layout.activity_festivals)
         findViewById<RecyclerView>(R.id.festivals).apply {
             adapter = adapterRV
         }
         adapterRV.setData(Datasource().loadFestivals(this@FestivalsActivity))
-        fetchFestivals()
-    }
 
-    private fun fetchFestivals() {
-        val call = NetworkService.festivalService.getFestivals()
-        call.enqueue(object : Callback<List<FestivalDTO>> {
-            override fun onResponse(call: Call<List<FestivalDTO>>, response: Response<List<FestivalDTO>>) {
-                Log.d("RETROFIT", "Response: ${response.body()}")
-
-                response.body()?.map { festivalDTO ->
-                    Festival(
-                        title = festivalDTO.name,
-                        date = "${festivalDTO.startDate}(${festivalDTO.durationInDays})",
-                        cost = "${festivalDTO.cost} ${festivalDTO.currency}",
-                        genres = festivalDTO.genre ?: "-",
-                        imageUrl = festivalDTO.imageUrl
-                    )
-                }?.let {
-                    adapterRV.setData(it)
-                }
+        viewModel._dataStream.observe(this) { festivalsState ->
+            when(festivalsState){
+                FestivalsViewModel.FestivalsState.Loading -> Toast.makeText(this, "Loading!", Toast.LENGTH_SHORT).show()
+                is FestivalsViewModel.FestivalsState.Loaded -> adapterRV.setData(festivalsState.list)
+                FestivalsViewModel.FestivalsState.Error -> Toast.makeText(this, "ERRROR!", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onFailure(call: Call<List<FestivalDTO>>, t: Throwable) {
-                Log.e("RETROFIT", "Failed to fetch festivals", t)
-            }
-
-        })
+        }
     }
 }
