@@ -11,7 +11,7 @@ import retrofit2.Response
 class FestivalsViewModel : ViewModel() {
 
     private val dataStream = MutableLiveData<FestivalsState>()
-    val _dataStream : LiveData<FestivalsState> = dataStream
+    val _dataStream: LiveData<FestivalsState> = dataStream
 
     init {
         fetchFestivals()
@@ -22,9 +22,15 @@ class FestivalsViewModel : ViewModel() {
         val call = NetworkService.festivalService.getFestivals()
         call.enqueue(object : Callback<List<FestivalDTO>> {
             override fun onResponse(call: Call<List<FestivalDTO>>, response: Response<List<FestivalDTO>>) {
-                Log.d("RETROFIT", "Response: ${response.body()}")
-
-                response.body()?.map { festivalDTO ->
+                val festivalsDTO = response.body()
+                Log.d("RETROFIT", "Response: $festivalsDTO")
+                festivalsDTO?.let {
+                    Thread {
+                        App.database.festivalsDao().delete()
+                        App.database.festivalsDao().insert(festivalsDTO)
+                    }.start()
+                }
+                festivalsDTO?.map { festivalDTO ->
                     Festival(
                         title = festivalDTO.name,
                         date = "${festivalDTO.startDate}(${festivalDTO.durationInDays})",

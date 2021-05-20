@@ -30,28 +30,28 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?colorPrimary"
+                android:textColor="?colorOnPrimary"
                 tools:text="Event 1" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?colorPrimary"
+                android:textColor="?colorOnPrimary"
                 tools:text="Time" />
 
             <TextView
                 android:id="@+id/cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?colorPrimary"
+                android:textColor="?colorOnPrimary"
                 tools:text="Cost" />
 
             <TextView
                 android:id="@+id/genres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?colorPrimary"
+                android:textColor="?colorOnPrimary"
                 tools:text="Genres" />
         </LinearLayout>
 
