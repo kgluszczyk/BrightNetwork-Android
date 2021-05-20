@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 typealias FestivalClick = (Festival) -> Unit
 class FestivalsAdapter(private var festivals: List<Festival> = emptyList(), private val action: FestivalClick) : RecyclerView.Adapter<FestivalViewHolder>() {
@@ -35,7 +36,11 @@ class FestivalViewHolder(private val view: View, private val action: FestivalCli
     RecyclerView.ViewHolder(view) {
 
     fun bind(festival: Festival) {
-        //view.findViewById<ImageView>(R.id.image_background).setImageResource(festival.imageUrl)
+        view.findViewById<ImageView>(R.id.image_background).also {
+            Glide.with(it)
+                .load(festival.imageUrl)
+                .into(it)
+        }
         view.findViewById<TextView>(R.id.title).text = festival.title
         view.findViewById<TextView>(R.id.cost).text = festival.cost
         view.findViewById<TextView>(R.id.date).text = festival.date
