@@ -4,6 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,33 +23,25 @@ class FestivalsViewModel : ViewModel() {
 
     private fun fetchFestivals() {
         dataStream.postValue(FestivalsState.Loading)
-        val call = NetworkService.festivalService.getFestivals()
-        call.enqueue(object : Callback<List<FestivalDTO>> {
-            override fun onResponse(call: Call<List<FestivalDTO>>, response: Response<List<FestivalDTO>>) {
-                val festivalsDTO = response.body()
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val festivalsDTO = NetworkService.festivalService.getFestivals()
                 Log.d("RETROFIT", "Response: $festivalsDTO")
-                festivalsDTO?.let {
-                    Thread {
-                        App.database.festivalsDao().delete()
-                        App.database.festivalsDao().insert(festivalsDTO)
-                    }.start()
+                festivalsDTO.let {
+                    App.database.festivalsDao().delete()
+                    App.database.festivalsDao().insert(festivalsDTO)
                 }
-                festivalsDTO?.let {
+                festivalsDTO.let {
+                    dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
+                }
+            } catch (exception: Exception) {
+                Log.e("RETROFIT", "Failed to fetch festivals", exception)
+                dataStream.postValue(FestivalsState.Error)
+                App.database.festivalsDao().get().also {
                     dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
                 }
             }
-
-            override fun onFailure(call: Call<List<FestivalDTO>>, t: Throwable) {
-                Log.e("RETROFIT", "Failed to fetch festivals", t)
-                dataStream.postValue(FestivalsState.Error)
-                Thread {
-                    App.database.festivalsDao().get().also {
-                        dataStream.postValue(FestivalsState.Loaded(it.toFestivals()))
-                    }
-                }.start()
-            }
-
-        })
+        }
     }
 
     sealed class FestivalsState {

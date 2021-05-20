@@ -37,6 +37,6 @@ object NetworkService {
     interface FestivalService {
 
         @GET("events")
-        fun getFestivals(): Call<List<FestivalDTO>>
+        suspend fun getFestivals(): List<FestivalDTO>
     }
 }
