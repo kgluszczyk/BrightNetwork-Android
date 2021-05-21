@@ -14,5 +14,7 @@ data class FestivalDTO(
     @field:Json(name = "location") val location: String,
     @field:Json(name = "cost") val cost: Int?,
     @field:Json(name = "currency") val currency: String?,
+    @field:Json(name = "lat") val latitude: Double?,
+    @field:Json(name = "long") val longitude: Double?,
     @field:Json(name = "genre") val genre: String?
 )

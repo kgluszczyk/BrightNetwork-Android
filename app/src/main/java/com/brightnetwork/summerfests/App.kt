@@ -15,7 +15,8 @@ class App : Application() {
             applicationContext,
             AppDatabase::class.java,
             "festivals"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
         Log.d("LIFECYCLE", "APP-starts")
     }
 }

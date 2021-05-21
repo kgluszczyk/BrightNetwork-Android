@@ -8,7 +8,7 @@ import androidx.room.Query
 import androidx.room.RoomDatabase
 import kotlinx.coroutines.flow.Flow
 
-@Database(entities = [FestivalDTO::class], version = 1)
+@Database(entities = [FestivalDTO::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun festivalsDao(): FestivalsDao
