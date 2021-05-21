@@ -53,6 +53,7 @@ class FestivalsActivity : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_1 -> {
+                    InfoDialog().show(supportFragmentManager, "InfoDialog")
                     true
                 }
                 R.id.action_2 -> {
