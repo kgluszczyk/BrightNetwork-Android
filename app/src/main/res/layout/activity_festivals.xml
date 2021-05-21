@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".FestivalsActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_baseline_bakery_dining_24"
+        app:menu="@menu/main_menu"
+        app:title="@string/app_name" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/festivals"
         android:layout_width="match_parent"

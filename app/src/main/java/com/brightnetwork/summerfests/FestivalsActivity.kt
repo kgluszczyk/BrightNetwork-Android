@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.appbar.MaterialToolbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +43,26 @@ class FestivalsActivity : AppCompatActivity() {
                 map = it
             }
         }
+
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
+        toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_1 -> {
+                    true
+                }
+                R.id.action_2 -> {
+                    Toast.makeText(this, "You've just clicked a crosount", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
 
         adapterRV.setData(Datasource().loadFestivals(this@FestivalsActivity))
 
