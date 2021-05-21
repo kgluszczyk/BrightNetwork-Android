@@ -31,7 +31,8 @@ class FestivalsViewModel : ViewModel() {
         }
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val festivalsDTO = NetworkService.festivalService.getFestivals()
+                val festivalsDTO = NetworkService.festivalService.
+                getFestivals()
                 Log.d("RETROFIT", "Response: $festivalsDTO")
                 festivalsDTO.let {
                     App.database.festivalsDao().delete()
