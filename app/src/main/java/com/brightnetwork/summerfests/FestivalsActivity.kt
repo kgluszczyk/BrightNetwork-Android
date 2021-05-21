@@ -13,10 +13,16 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.IllegalStateException
 
 class FestivalsActivity : AppCompatActivity() {
 
@@ -31,6 +37,7 @@ class FestivalsActivity : AppCompatActivity() {
     var map: GoogleMap? = null
     val markersMap = mutableMapOf<Festival, Marker>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(FestivalsViewModel::class.java)
@@ -44,10 +51,11 @@ class FestivalsActivity : AppCompatActivity() {
             }
         }
 
+        setupFirebaseMessaging()
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
 
         toolbar.setNavigationOnClickListener {
-            finish()
+            throw IllegalStateException("TEST crash")
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->
@@ -57,6 +65,7 @@ class FestivalsActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_2 -> {
+                    Firebase.analytics.logEvent("Action2", null)
                     Toast.makeText(this, "You've just clicked a crosount", Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -102,5 +111,20 @@ class FestivalsActivity : AppCompatActivity() {
                 FestivalsViewModel.FestivalsState.Error -> Toast.makeText(this, "ERRROR!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setupFirebaseMessaging() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("FMFMFM", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Log.d("FMFMFM", "$token")
+        })
     }
 }

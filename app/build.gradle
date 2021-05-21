@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.secrets_gradle_plugin' version '0.5'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -22,10 +24,13 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix ".debug"
+            manifestPlaceholders["appNameLauncher"] = "[D]SummerFest"
             buildConfigField "String", "BASE_URL", "\"https://my-json-server.typicode.com/kgluszczyk/fake-server-events/\""
         }
         release {
             minifyEnabled false
+            manifestPlaceholders["appNameLauncher"] = "SummerFest"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -77,4 +82,8 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 }

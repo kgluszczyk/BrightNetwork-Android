@@ -27,3 +27,7 @@ fun List<FestivalDTO>.toFestivals() = this.map { festivalDTO ->
         )
     )
 }
+
+fun List<FestivalDTO>.getFestival(location: String) = this.filter {
+    it.location == location
+}.asSequence().sortedBy { it.cost ?: Int.MAX_VALUE }.map { it.cost }.take(3)
