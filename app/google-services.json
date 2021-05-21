@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1009879322988",
+    "project_id": "summerfests-brightnetwork",
+    "storage_bucket": "summerfests-brightnetwork.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009879322988:android:1c170f2a1393100cc52349",
+        "android_client_info": {
+          "package_name": "com.brightnetwork.summerfests"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009879322988-ljoafet4ko4jrrc8hjr7fro55843ohao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ468iQhyxHAOuVGs6mPIuzDNBsrUSx0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009879322988-ljoafet4ko4jrrc8hjr7fro55843ohao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009879322988:android:9c245853aa259f66c52349",
+        "android_client_info": {
+          "package_name": "com.brightnetwork.summerfests.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009879322988-ljoafet4ko4jrrc8hjr7fro55843ohao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ468iQhyxHAOuVGs6mPIuzDNBsrUSx0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009879322988-ljoafet4ko4jrrc8hjr7fro55843ohao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

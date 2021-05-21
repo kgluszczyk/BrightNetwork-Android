@@ -12,7 +12,14 @@ import org.junit.Assert.*
 class ExampleUnitTest {
 
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun `test if toFestivals is not adding anything`() {
+        //given
+        val festivalsDTO = listOf<FestivalDTO>()
+
+         //when
+        val transformedFestivals  = festivalsDTO.toFestivals()
+
+        //then
+        assertEquals(1, transformedFestivals.size)
     }
 }
