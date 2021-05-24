@@ -24,8 +24,11 @@ Basic types
 
 
 [Basic syntax](https://kotlinlang.org/docs/basic-syntax.html)
+
 [Playground](https://play.kotlinlang.org/)
+
 [Examples](https://play.kotlinlang.org/byExample/overview)
+
 [Kotlin Koans](https://play.kotlinlang.org/koans/)
 
 ## Day 2
