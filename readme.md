@@ -1,4 +1,3 @@
-
 # Android foundation course
 
 5 days foundation course that starts from implementing the basic requirements, improving the solution iteratively and releasing the final version on Play Store.
@@ -21,15 +20,6 @@ Kotlin/JS and Kotlin/Native
 Paradigms
 Java vs Kotlin release cycle
 Basic types
-
-
-[Basic syntax](https://kotlinlang.org/docs/basic-syntax.html)
-
-[Playground](https://play.kotlinlang.org/)
-
-[Examples](https://play.kotlinlang.org/byExample/overview)
-
-[Kotlin Koans](https://play.kotlinlang.org/koans/)
 
 ## Day 2
 
@@ -105,3 +95,40 @@ Release preperations:
  - Initial Setup
  - Play Store Listening Setup
  - Internal Track Publication
+
+# Self-development
+
+### Trainings
+
+#### Kotlin
+ - [Basic syntax](https://kotlinlang.org/docs/basic-syntax.html)
+ - [Playground](https://play.kotlinlang.org/)
+ - [Examples](https://play.kotlinlang.org/byExample/overview)
+ - [Kotlin Koans](https://play.kotlinlang.org/koans/)
+
+[Android](https://developer.android.com/courses)
+
+### Concepts and Tools
+
+#### Android Jetpack & Architecture Components
+ - [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)
+ - [Navigation Components](https://developer.android.com/guide/navigation/navigation-getting-started)
+ - [Data Binding Library](https://developer.android.com/topic/libraries/data-binding)
+ - [Animations](https://developer.android.com/training/animation)
+ - [JetpackCompose](https://developer.android.com/jetpack/compose)
+ - [Android Slices](https://developer.android.com/guide/slices)
+ - [Dependency Injection](https://developer.android.com/training/dependency-injection),
+ - [Dagger](https://dagger.dev/dev-guide/android.html)
+ - [Android Dev Challange](https://developer.android.com/dev-challenge)
+ - [Performance](https://developer.android.com/topic/performance)
+ - [Testing](https://developer.android.com/training/testing)
+ - [Security](https://developer.android.com/topic/performance)
+ - [Privacy](https://developer.android.com/privacy/best-practices)
+ - [App location](https://developer.android.com/training/location)
+ - [Data Store](https://developer.android.com/topic/libraries/architecture/datastore)
+
+### Samples & Open Source Projects
+
+ - [Architecture](https://github.com/android/architecture-samples)
+ - [StarterApps](https://github.com/google-developer-training/android-kotlin-fundamentals-starter-apps), [Apps](https://github.com/google-developer-training/android-kotlin-fundamentals-apps)
+ - [Android Open Source Projects](https://github.com/binaryshrey/Awesome-Android-Open-Source-Projects)
